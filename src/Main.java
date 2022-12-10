@@ -1,6 +1,7 @@
 import fileWork.ReadFileWork;
 import generation.WordsGeneration;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,8 +9,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ReadFileWork work = new ReadFileWork();
         WordsGeneration generate = new WordsGeneration();
-        String[] letters;
-        String[] userLetters;
+        List<String> generatedLetter;
+        String[] userLetter;
         int victoryNum = 0;
         int loseNum = 0;
         System.out.println("Добро пожаловать в игру 5 букв!");
@@ -20,44 +21,42 @@ public class Main {
                     3-Выйти из игры
                     """);
             int menu = scanner.nextInt();
-            String[] generatedWord = work.readFile("src/files/fileWIthWords.txt");
-            int num = generatedWord.length;
+            String[] arrayWords = work.readFile("src/files/fileWIthWords.txt");
+            int num = arrayWords.length;
             switch (menu) {
                 case 1 -> {
                     int ranNum = (int) (Math.random() * num);
-                    String newWord = generate.getWord(ranNum);
-                    letters = newWord.split("");
+                    String generatedWord = generate.getWord(ranNum);
+                    generatedLetter = List.of(generatedWord.split(""));
                     int lives = 6;
                     boolean play = false;
                     System.out.println("Давайте начнем! У вас 6 попыток.");
                     while ((lives > 0) && (!play)){
                         System.out.print("Введите слово: ");
-                        String word = scanner.next();
-                        userLetters = word.split("");
-                        for (int i = 0; i < letters.length; i++){
-                            for (int j = 0; j < letters.length; j++) {
-                                if (userLetters[i].equals(letters[j]) && i == j) {
-                                    System.out.print(userLetters[i].toUpperCase() + " ");
-                                    break;
-                                } else if (letters[i].equals(userLetters[j]) && i != j) {
-                                    System.out.print(userLetters[i].toLowerCase() + " ");
-                                    break;
-                                }
-                                if (word.equals(newWord)) {
-                                    play = true;
-                                }
+                        String userWord = scanner.next();
+                        userLetter = userWord.split("");
+                        for (int i = 0; i < userLetter.length; i++){
+                            String letter = userLetter[i];
+                            if(generatedLetter.contains(letter)
+                                    && !generatedLetter.get(i).equals(letter)){
+                                System.out.print(letter.toLowerCase()+" ");
                             }
-                            System.out.print("_ ");
+                            else if(generatedLetter.contains(letter)
+                                    && generatedLetter.get(i).equals(letter)){
+                                System.out.print(letter.toUpperCase()+" ");
+                            }
+                            else
+                                System.out.print("_ ");
                         }
                         System.out.print("\n");
-                        if (word.equals(newWord)){
+                        if (userWord.equals(generatedWord)){
                             System.out.println("Вы выиграли!");
                             victoryNum++;
                         }
                         lives--;
                     }
                     if (!play) {
-                        System.out.println("Попробуйте в следующий раз, а слово было " + newWord);
+                        System.out.println("Попробуйте в следующий раз, а слово было " + generatedWord);
                         loseNum++;
                     }
                 }
