@@ -1,16 +1,17 @@
-import fileWork.ReadFile;
+import fileWork.ReadFileWork;
 import generation.WordsGeneration;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ReadFile work = new ReadFile();
+        ReadFileWork work = new ReadFileWork();
         WordsGeneration generate = new WordsGeneration();
         String[] letters;
         String[] userLetters;
+        int victoryNum = 0;
+        int loseNum = 0;
         System.out.println("Добро пожаловать в игру 5 букв!");
         while (true) {
             System.out.println("""
@@ -21,8 +22,6 @@ public class Main {
             int menu = scanner.nextInt();
             String[] generatedWord = work.readFile("src/files/fileWIthWords.txt");
             int num = generatedWord.length;
-            int victoryNum = 0;
-            int loseNum = 0;
             switch (menu) {
                 case 1 -> {
                     int ranNum = (int) (Math.random() * num);
@@ -30,22 +29,30 @@ public class Main {
                     letters = newWord.split("");
                     int lives = 6;
                     boolean play = false;
+                    boolean happy = false;
                     System.out.println("Давайте начнем! У вас 6 попыток.");
                     while ((lives > 0) && (!play)){
                         System.out.print("Введите слово: ");
                         String word = scanner.next();
                         userLetters = word.split("");
-                        boolean[] corLet = new boolean[5];
                         for (int i = 0; i < letters.length; i++){
-                            if (corLet[i] || Objects.equals(userLetters[i], letters[i])){
-                                System.out.print(letters[i] + " ");
-                                corLet[i] = true;
+                            happy = false;
+                            for (int j = 0; j < letters.length; j++) {
+                                if (userLetters[i].equals(letters[j]) && i == j) {
+                                    System.out.print(userLetters[i].toUpperCase() + " ");
+                                    happy = true;
+                                    break;
+                                } else if (letters[i].equals(userLetters[j]) && i != j) {
+                                    System.out.print(userLetters[i].toLowerCase() + " ");
+                                    happy = true;
+                                    break;
+                                }
+                                if (word.equals(newWord)) {
+                                    play = true;
+                                }
                             }
-                            else {
+                            if (!happy) {
                                 System.out.print("_ ");
-                            }
-                            if (word.equals(newWord)){
-                                play = true;
                             }
                         }
                         System.out.print("\n");
