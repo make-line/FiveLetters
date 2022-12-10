@@ -29,31 +29,25 @@ public class Main {
                     letters = newWord.split("");
                     int lives = 6;
                     boolean play = false;
-                    boolean happy = false;
                     System.out.println("Давайте начнем! У вас 6 попыток.");
                     while ((lives > 0) && (!play)){
                         System.out.print("Введите слово: ");
                         String word = scanner.next();
                         userLetters = word.split("");
                         for (int i = 0; i < letters.length; i++){
-                            happy = false;
                             for (int j = 0; j < letters.length; j++) {
                                 if (userLetters[i].equals(letters[j]) && i == j) {
                                     System.out.print(userLetters[i].toUpperCase() + " ");
-                                    happy = true;
                                     break;
                                 } else if (letters[i].equals(userLetters[j]) && i != j) {
                                     System.out.print(userLetters[i].toLowerCase() + " ");
-                                    happy = true;
                                     break;
                                 }
                                 if (word.equals(newWord)) {
                                     play = true;
                                 }
                             }
-                            if (!happy) {
-                                System.out.print("_ ");
-                            }
+                            System.out.print("_ ");
                         }
                         System.out.print("\n");
                         if (word.equals(newWord)){
