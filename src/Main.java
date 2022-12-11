@@ -31,25 +31,23 @@ public class Main {
                     int lives = 6;
                     boolean play = false;
                     System.out.println("Давайте начнем! У вас 6 попыток.");
-                    while ((lives > 0) && (!play)){
+                    while ((lives > 0) && (!play)) {
                         System.out.print("Введите слово: ");
                         String userWord = scanner.next();
                         userLetter = userWord.split("");
-                        for (int i = 0; i < userLetter.length; i++){
+                        for (int i = 0; i < userLetter.length; i++) {
                             String letter = userLetter[i];
-                            if(generatedLetter.contains(letter)
-                                    && !generatedLetter.get(i).equals(letter)){
-                                System.out.print(letter.toLowerCase()+" ");
-                            }
-                            else if(generatedLetter.contains(letter)
-                                    && generatedLetter.get(i).equals(letter)){
-                                System.out.print(letter.toUpperCase()+" ");
-                            }
-                            else
+                            if (generatedLetter.contains(letter)
+                                    && !generatedLetter.get(i).equals(letter)) {
+                                System.out.print(letter.toLowerCase() + " ");
+                            } else if (generatedLetter.contains(letter)
+                                    && generatedLetter.get(i).equals(letter)) {
+                                System.out.print(letter.toUpperCase() + " ");
+                            } else
                                 System.out.print("_ ");
                         }
                         System.out.print("\n");
-                        if (userWord.equals(generatedWord)){
+                        if (userWord.equals(generatedWord)) {
                             System.out.println("Вы выиграли!");
                             victoryNum++;
                         }
