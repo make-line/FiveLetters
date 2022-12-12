@@ -1,16 +1,13 @@
-import fileWork.ReadFileWork;
 import generation.WordsGeneration;
+import playground.Playground;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ReadFileWork work = new ReadFileWork();
         WordsGeneration generate = new WordsGeneration();
-        List<String> generatedLetter;
-        String[] userLetter;
+        Playground playground = new Playground();
         int victoryNum = 0;
         int loseNum = 0;
         System.out.println("Добро пожаловать в игру 5 букв!");
@@ -21,35 +18,24 @@ public class Main {
                     3-Выйти из игры
                     """);
             int menu = scanner.nextInt();
-            String[] arrayWords = work.readFile("src/files/fileWIthWords.txt");
-            int num = arrayWords.length;
             switch (menu) {
                 case 1 -> {
-                    int ranNum = (int) (Math.random() * num);
-                    String generatedWord = generate.getWord(ranNum);
-                    generatedLetter = List.of(generatedWord.split(""));
+                    String generatedWord = generate.getWord();
                     int lives = 6;
                     boolean play = false;
                     System.out.println("Давайте начнем! У вас 6 попыток.");
                     while ((lives > 0) && (!play)) {
                         System.out.print("Введите слово: ");
                         String userWord = scanner.next();
-                        userLetter = userWord.split("");
-                        for (int i = 0; i < userLetter.length; i++) {
-                            String letter = userLetter[i];
-                            if (generatedLetter.contains(letter)
-                                    && !generatedLetter.get(i).equals(letter)) {
-                                System.out.print(letter.toLowerCase() + " ");
-                            } else if (generatedLetter.contains(letter)
-                                    && generatedLetter.get(i).equals(letter)) {
-                                System.out.print(letter.toUpperCase() + " ");
-                            } else
-                                System.out.print("_ ");
+                        String[] gameWord = playground.play(generatedWord, userWord);
+                        for (int i = 0; i < 5; i++){
+                            System.out.print(gameWord[i]);
                         }
-                        System.out.print("\n");
+                        System.out.println();
                         if (userWord.equals(generatedWord)) {
                             System.out.println("Вы выиграли!");
                             victoryNum++;
+                            play = true;
                         }
                         lives--;
                     }
