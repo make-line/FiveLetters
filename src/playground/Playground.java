@@ -11,12 +11,12 @@ public class Playground {
             String letter = userLetter[i];
             if (generatedLetter.contains(letter)
                     && !generatedLetter.get(i).equals(letter)) {
-                word[i] = letter.toLowerCase() + " ";
+                word[i] = letter.toLowerCase();
             } else if (generatedLetter.contains(letter)
                     && generatedLetter.get(i).equals(letter)) {
-                word[i] = letter.toUpperCase() + " ";
+                word[i] = letter.toUpperCase();
             } else
-                word[i] = "_ ";
+                word[i] = "_";
         }
         return word;
     }

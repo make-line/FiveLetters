@@ -1,4 +1,5 @@
 import generation.WordsGeneration;
+import playground.CheckingWord;
 import playground.Playground;
 
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         WordsGeneration generate = new WordsGeneration();
         Playground playground = new Playground();
+        CheckingWord checkingWord = new CheckingWord();
         int victoryNum = 0;
         int loseNum = 0;
         System.out.println("Добро пожаловать в игру 5 букв!");
@@ -27,9 +29,10 @@ public class Main {
                     while ((lives > 0) && (!play)) {
                         System.out.print("Введите слово: ");
                         String userWord = scanner.next();
-                        String[] gameWord = playground.play(generatedWord, userWord);
+                        String[] gameLetter = playground.play(generatedWord, userWord);
+                        String[] checkedWord = checkingWord.check(gameLetter, generatedWord);
                         for (int i = 0; i < 5; i++){
-                            System.out.print(gameWord[i]);
+                            System.out.print(checkedWord[i] + " ");
                         }
                         System.out.println();
                         if (userWord.equals(generatedWord)) {
