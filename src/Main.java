@@ -32,7 +32,12 @@ public class Main {
                         String[] gameLetter = playground.play(generatedWord, userWord);
                         String[] checkedWord = checkingWord.check(gameLetter, generatedWord);
                         for (int i = 0; i < 5; i++) {
-                            System.out.print(checkedWord[i] + " ");
+                            if (checkedWord[i] == null){
+                                System.out.print("_ ");
+                            }
+                            else {
+                                System.out.print(checkedWord[i] + " ");
+                            }
                         }
                         System.out.println();
                         if (userWord.equals(generatedWord)) {
