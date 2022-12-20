@@ -3,7 +3,7 @@ package playground;
 import java.util.List;
 
 public class Playground {
-    public String[] play(String generatedWord, String userWord){
+    public String[] play(String generatedWord, String userWord) {
         List<String> generatedLetter = List.of(generatedWord.split(""));
         String[] userLetter = userWord.split("");
         String[] word = new String[5];

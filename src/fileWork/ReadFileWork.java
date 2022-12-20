@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class ReadFileWork {
-    public String[] readFile (String path){
+    public String[] readFile(String path) {
         StringBuilder str = new StringBuilder();
 
         try {

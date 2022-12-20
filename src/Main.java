@@ -31,7 +31,7 @@ public class Main {
                         String userWord = scanner.next();
                         String[] gameLetter = playground.play(generatedWord, userWord);
                         String[] checkedWord = checkingWord.check(gameLetter, generatedWord);
-                        for (int i = 0; i < 5; i++){
+                        for (int i = 0; i < 5; i++) {
                             System.out.print(checkedWord[i] + " ");
                         }
                         System.out.println();
