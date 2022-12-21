@@ -9,5 +9,4 @@ public class WordsGeneration {
         int ranNum = (int) (Math.random() * wordsArray.length);
         return wordsArray[ranNum];
     }
-
 }
