@@ -34,7 +34,7 @@ public class Main {
                         System.out.print("Введите слово: ");
                         String userWord = scanner.next();
                         while (!listOfWords.contains(userWord)){
-                            System.out.println("Введите правильное слово до 5 букв!");
+                            System.out.println("Введите существующее слово до 5 букв!");
                             userWord = scanner.next();
                         }
                         String[] gameLetter = playground.play(generatedWord, userWord);
