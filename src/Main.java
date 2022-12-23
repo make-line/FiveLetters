@@ -1,7 +1,9 @@
+import fileWork.ReadFileWork;
 import generation.WordsGeneration;
 import playground.CheckingWord;
 import playground.Playground;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -10,8 +12,10 @@ public class Main {
         WordsGeneration generate = new WordsGeneration();
         Playground playground = new Playground();
         CheckingWord checkingWord = new CheckingWord();
+        ReadFileWork file = new ReadFileWork();
         int victoryNum = 0;
         int loseNum = 0;
+        List<String> listOfWords = file.allWordsMap("src/files/fileWithWords.txt");
         System.out.println("Добро пожаловать в игру 5 букв!");
         while (true) {
             System.out.println("""
@@ -29,6 +33,10 @@ public class Main {
                     while ((lives > 0) && (!play)) {
                         System.out.print("Введите слово: ");
                         String userWord = scanner.next();
+                        while (!listOfWords.contains(userWord)){
+                            System.out.println("Введите правильное слово до 5 букв!");
+                            userWord = scanner.next();
+                        }
                         String[] gameLetter = playground.play(generatedWord, userWord);
                         String[] checkedWord = checkingWord.check(gameLetter, generatedWord);
                         for (int i = 0; i < 5; i++) {
